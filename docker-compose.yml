@@ -1,0 +1,94 @@
+version: '2'
+services:
+  mariadb-m1:
+    build: ./mariadb-master
+    container_name: mariadb-m1
+    volumes:
+      #- ./mariadb-master/config/mariadb/master/:/etc/mysql/:ro
+      #- /etc/localtime:/etc/localtime:ro
+      #- /home/ssab/config/hosts:/etc/hosts:ro
+    ports:
+      - "3309:3306"
+    #networks:
+    #  mysql:
+    #    ipv4_address: 172.18.0.2
+    ulimits:
+      nproc: 65535
+    hostname: m1
+    mem_limit: 1024m
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: 123456
+  mariadb-s1:
+      build: ./mariadb-slave_01
+      container_name: mariadb-s1
+      volumes:
+        #- /home/ssab/config/mysql-s1/:/etc/mysql/:ro
+        #- /etc/localtime:/etc/localtime:ro
+        #- /home/ssab/config/hosts:/etc/hosts:ro
+      ports:
+        - "3307:3306"
+      #networks:
+      #  mysql:
+      #    ipv4_address: 172.18.0.3
+      links:
+        - mariadb-m1
+      ulimits:
+        nproc: 65535
+      hostname: mariadb-s1
+      mem_limit: 1024m
+      restart: always
+      environment:
+        MYSQL_ROOT_PASSWORD: 123456
+  mariadb-s2:
+    build: ./mariadb-slave_02
+    container_name: mariadb-s2
+    volumes:
+      #- /home/ssab/config/mysql-s2/:/etc/mysql/:ro
+      #- /etc/localtime:/etc/localtime:ro
+      #- /home/ssab/config/hosts:/etc/hosts:ro
+    ports:
+      - "3308:3306"
+    links:
+      - mariadb-m1
+    #networks:
+    #  mysql:
+    #    ipv4_address: 172.18.0.4
+    ulimits:
+      nproc: 65535
+    hostname: mariadb-s2
+    mem_limit: 1024m
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: 123456
+  mycat:
+    build: ./mycat
+    container_name: mycat
+    #volumes:
+    # - /home/ssab/config/mycat/:/mycat/conf/:ro
+    #  - /home/ssab/config/mycat-logs/:/mycat/logs/:rw
+    #  - /etc/localtime:/etc/localtime:ro
+    # - /home/ssab/config/hosts:/etc/hosts:ro
+    ports:
+      - "8066:8066"
+      - "9066:9066"
+    links:
+      - mariadb-m1
+      - mariadb-s1
+      - mariadb-s2
+    #networks:
+    #  mysql:
+    #    ipv4_address: 172.18.0.5
+    ulimits:
+      nproc: 65535
+    hostname: mycat
+    mem_limit: 1024m
+    restart: always
+networks:
+  mysql:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+      - subnet: 172.17.0.0/24
+        gateway: 172.17.0.1
