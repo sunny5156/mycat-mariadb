@@ -44,6 +44,9 @@ ENV MYSQL_LOG_QUERY="${MYSQL_DEF_LOG}/query.log"
 ###
 RUN groupadd -g ${MY_GID} -r ${MY_GROUP} && \
 	adduser ${MY_USER} -u ${MY_UID} -M -s /sbin/nologin -g ${MY_GROUP}
+	
+RUN echo "nameserver 8.8.8.8" >> /etc/resolv.conf \
+	&& systemctl restart network 
 
 RUN \
 	{ \
