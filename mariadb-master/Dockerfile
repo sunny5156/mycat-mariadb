@@ -55,10 +55,9 @@ RUN \
 		echo "gpgkey=https://yum.mariadb.org/RPM-GPG-KEY-MariaDB"; \
 		echo "gpgcheck=1"; \
 	} > /etc/yum.repos.d/mariadb-10.3.repo && \
-	yum clean all
+	#yum clean all
 
-RUN \
-	#yum -y update && \
+RUN yum -y update && \
 	yum -y install \
 	MariaDB-server
 
