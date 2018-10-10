@@ -57,7 +57,9 @@ RUN \
 	} > /etc/yum.repos.d/mariadb-10.3.repo && \
 	yum clean all
 
-RUN yum -y update && yum -y install \
+RUN \
+	#yum -y update && \
+	yum -y install \
 	MariaDB-server
 
 RUN \
