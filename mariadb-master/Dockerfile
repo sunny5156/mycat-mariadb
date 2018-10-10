@@ -54,7 +54,7 @@ RUN \
 		echo "baseurl = http://yum.mariadb.org/10.3/centos7-amd64"; \
 		echo "gpgkey=https://yum.mariadb.org/RPM-GPG-KEY-MariaDB"; \
 		echo "gpgcheck=1"; \
-	} > /etc/yum.repos.d/mariadb-10.3.repo && \
+	} > /etc/yum.repos.d/mariadb-10.3.repo 
 	#yum clean all
 
 RUN yum -y update && \
