@@ -3,7 +3,7 @@ services:
   mariadb-m1:
     build: ./mariadb-master
     container_name: mariadb-m1
-    volumes:
+    #volumes:
       #- ./mariadb-master/config/mariadb/master/:/etc/mysql/:ro
       #- /etc/localtime:/etc/localtime:ro
       #- /home/ssab/config/hosts:/etc/hosts:ro
@@ -22,7 +22,7 @@ services:
   mariadb-s1:
       build: ./mariadb-slave_01
       container_name: mariadb-s1
-      volumes:
+      #volumes:
         #- /home/ssab/config/mysql-s1/:/etc/mysql/:ro
         #- /etc/localtime:/etc/localtime:ro
         #- /home/ssab/config/hosts:/etc/hosts:ro
@@ -43,7 +43,7 @@ services:
   mariadb-s2:
     build: ./mariadb-slave_02
     container_name: mariadb-s2
-    volumes:
+    #volumes:
       #- /home/ssab/config/mysql-s2/:/etc/mysql/:ro
       #- /etc/localtime:/etc/localtime:ro
       #- /home/ssab/config/hosts:/etc/hosts:ro
