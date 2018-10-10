@@ -29,8 +29,8 @@ services:
       ports:
         - "3307:3306"
       networks:
-        mysql:
-          ipv4_address: 172.17.0.3
+        - mysql
+        #  ipv4_address: 172.17.0.3
       links:
         - mariadb-m1
       ulimits:
@@ -52,8 +52,8 @@ services:
     links:
       - mariadb-m1
     networks:
-      mysql:
-        ipv4_address: 172.17.0.4
+      - mysql
+      #  ipv4_address: 172.17.0.4
     ulimits:
       nproc: 65535
     hostname: mariadb-s2
@@ -77,8 +77,8 @@ services:
       - mariadb-s1
       - mariadb-s2
     networks:
-      mysql:
-        ipv4_address: 172.17.0.5
+      - mysql
+      #  ipv4_address: 172.17.0.5
     ulimits:
       nproc: 65535
     hostname: mycat
@@ -87,8 +87,8 @@ services:
 networks:
   mysql:
     driver: bridge
-    ipam:
-      driver: default
-      config:
-      - subnet: 172.17.0.0/24
-        gateway: 172.17.0.1
+    #ipam:
+    #  driver: default
+      #config:
+      #- subnet: 172.17.0.0/24
+      #  gateway: 172.17.0.1
