@@ -77,7 +77,7 @@
 	</firewall>-->
 
 	<user name="root">
-		<property name="password">jiabin</property>
+		<property name="password">123456</property>
 		<property name="schemas">mall</property>
 
 		<!-- 表级 DML 权限设置 -->
