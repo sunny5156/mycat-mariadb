@@ -3,15 +3,16 @@ services:
   mariadb-m1:
     build: ./mariadb-master
     container_name: mariadb-m1
-    #volumes:
-      #- ./mariadb-master/config/mariadb/master/:/etc/mysql/:ro
+    volumes:
+      - ./mariadb-master/config/my.cnf:/etc/my.cnf:rw
+      - ./mariadb-master/config/my.cnf.d/:/etc/my.cnf.d/:rw
+      - ./config/hosts:/etc/hosts:rw
       #- /etc/localtime:/etc/localtime:ro
-      #- /home/ssab/config/hosts:/etc/hosts:ro
     ports:
       - "3309:3306"
     networks:
       mysql:
-        ipv4_address: 172.17.0.2
+        ipv4_address: 172.18.0.2
     ulimits:
       nproc: 65535
     hostname: m1
@@ -22,15 +23,16 @@ services:
   mariadb-s1:
       build: ./mariadb-slave_01
       container_name: mariadb-s1
-      #volumes:
-        #- /home/ssab/config/mysql-s1/:/etc/mysql/:ro
-        #- /etc/localtime:/etc/localtime:ro
-        #- /home/ssab/config/hosts:/etc/hosts:ro
+      volumes:
+		- ./mariadb-slave_01/config/my.cnf:/etc/my.cnf:rw
+	    - ./mariadb-slave_01/config/my.cnf.d/:/etc/my.cnf.d/:rw
+	    - ./config/hosts:/etc/hosts:rw
+	    #- /etc/localtime:/etc/localtime:ro
       ports:
         - "3307:3306"
       networks:
-        - mysql
-        #  ipv4_address: 172.17.0.3
+        mysql:
+          ipv4_address: 172.18.0.3
       links:
         - mariadb-m1
       ulimits:
@@ -43,17 +45,17 @@ services:
   mariadb-s2:
     build: ./mariadb-slave_02
     container_name: mariadb-s2
-    #volumes:
-      #- /home/ssab/config/mysql-s2/:/etc/mysql/:ro
-      #- /etc/localtime:/etc/localtime:ro
-      #- /home/ssab/config/hosts:/etc/hosts:ro
+    volumes:
+		- ./mariadb-slave_02/config/my.cnf:/etc/my.cnf:rw
+	    - ./mariadb-slave_02/config/my.cnf.d/:/etc/my.cnf.d/:rw
+		- ./config/hosts:/etc/hosts:rw
     ports:
       - "3308:3306"
     links:
       - mariadb-m1
     networks:
-      - mysql
-      #  ipv4_address: 172.17.0.4
+      mysql:
+        ipv4_address: 172.18.0.4
     ulimits:
       nproc: 65535
     hostname: mariadb-s2
@@ -64,11 +66,11 @@ services:
   mycat:
     build: ./mycat
     container_name: mycat
-    #volumes:
-    # - /home/ssab/config/mycat/:/mycat/conf/:ro
-    #  - /home/ssab/config/mycat-logs/:/mycat/logs/:rw
-    #  - /etc/localtime:/etc/localtime:ro
-    # - /home/ssab/config/hosts:/etc/hosts:ro
+    volumes:
+      - ./mycat/config/:/mycat/conf/:rw
+      - ./mycat/logs/:/mycat/logs/:rw
+      - ./config/hosts:/etc/hosts:rw
+      #- /etc/localtime:/etc/localtime:ro
     ports:
       - "8066:8066"
       - "9066:9066"
@@ -77,8 +79,8 @@ services:
       - mariadb-s1
       - mariadb-s2
     networks:
-      - mysql
-      #  ipv4_address: 172.17.0.5
+      mysql:
+        ipv4_address: 172.18.0.5
     ulimits:
       nproc: 65535
     hostname: mycat
@@ -87,8 +89,8 @@ services:
 networks:
   mysql:
     driver: bridge
-    #ipam:
-    #  driver: default
-      #config:
-      #- subnet: 172.17.0.0/24
-      #  gateway: 172.17.0.1
+    ipam:
+      driver: default
+      config:
+      - subnet: 172.18.0.0/24
+        gateway: 172.18.0.1
