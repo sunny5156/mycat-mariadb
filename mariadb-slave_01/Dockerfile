@@ -5,6 +5,14 @@ FROM centos:7
 MAINTAINER "sunny5156" <sunny5156@qq.com>
 
 
+#RUN cd /etc/yum.repos.d \
+#	&& curl -o CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo
+#RUN mv CentOS-Base.repo CentOS-Base.repo.bk
+#RUN wget http://mirrors.163.com/.help/CentOS7-Base-163.repo
+#RUN mv CentOS7-Base-163.repo CentOS-Base.repo && rm -rf /var/cache/yum
+#RUN curl -o /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo
+
+
 ##
 ## Labels
 ##
@@ -44,6 +52,8 @@ ENV MYSQL_LOG_QUERY="${MYSQL_DEF_LOG}/query.log"
 ###
 RUN groupadd -g ${MY_GID} -r ${MY_GROUP} && \
 	adduser ${MY_USER} -u ${MY_UID} -M -s /sbin/nologin -g ${MY_GROUP}
+	
+RUN echo "nameserver 8.8.8.8" >> /etc/resolv.conf 
 
 RUN \
 	{ \
@@ -51,21 +61,23 @@ RUN \
 		echo "# http://downloads.mariadb.org/mariadb/repositories/"; \
 		echo "[mariadb]"; \
 		echo "name = MariaDB"; \
-		echo "baseurl = http://yum.mariadb.org/10.3/centos7-amd64"; \
+		echo "#baseurl = http://yum.mariadb.org/10.3/centos7-amd64"; \
+		echo "baseurl = https://mirrors.shu.edu.cn/mariadb/mariadb-10.3.7/yum/centos7-amd64/"; \
 		echo "gpgkey=https://yum.mariadb.org/RPM-GPG-KEY-MariaDB"; \
 		echo "gpgcheck=1"; \
-	} > /etc/yum.repos.d/mariadb-10.3.repo && \
-	yum clean all
+	} > /etc/yum.repos.d/mariadb-10.3.repo \
+	&& rm -rf /var/cache/yum
+	
+#RUN rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7
 
-RUN yum -y update && yum -y install \
-	MariaDB-server
+RUN	yum -y install  MariaDB-server --nogpgcheck
 
 RUN \
 	yum -y autoremove && \
 	yum clean metadata && \
-	yum clean all && \
+	rm -rf /var/cache/yum && \
 	yum -y install hostname && \
-	yum clean all
+	rm -rf /var/cache/yum
 
 
 ##
