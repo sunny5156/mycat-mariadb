@@ -1,0 +1,5 @@
+127.0.0.1	localhost
+172.18.0.2	mariadb-m1
+172.18.0.3	mariadb-s1
+172.18.0.4	mariadb-s2
+172.18.0.5  mycat
