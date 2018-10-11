@@ -24,10 +24,10 @@ services:
       build: ./mariadb-slave_01
       container_name: mariadb-s1
       volumes:
-		- ./mariadb-slave_01/config/my.cnf:/etc/my.cnf:rw
-	    - ./mariadb-slave_01/config/my.cnf.d/:/etc/my.cnf.d/:rw
-	    - ./config/hosts:/etc/hosts:rw
-	    #- /etc/localtime:/etc/localtime:ro
+        - ./mariadb-slave_01/config/my.cnf:/etc/my.cnf:rw
+        - ./mariadb-slave_01/config/my.cnf.d/:/etc/my.cnf.d/:rw
+        - ./config/hosts:/etc/hosts:rw
+        #- /etc/localtime:/etc/localtime:ro
       ports:
         - "3307:3306"
       networks:
@@ -46,9 +46,9 @@ services:
     build: ./mariadb-slave_02
     container_name: mariadb-s2
     volumes:
-		- ./mariadb-slave_02/config/my.cnf:/etc/my.cnf:rw
-	    - ./mariadb-slave_02/config/my.cnf.d/:/etc/my.cnf.d/:rw
-		- ./config/hosts:/etc/hosts:rw
+        - ./mariadb-slave_02/config/my.cnf:/etc/my.cnf:rw
+        - ./mariadb-slave_02/config/my.cnf.d/:/etc/my.cnf.d/:rw
+        - ./config/hosts:/etc/hosts:rw
     ports:
       - "3308:3306"
     links:
