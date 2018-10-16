@@ -3,7 +3,7 @@
 <mycat:schema xmlns:mycat="http://io.mycat/">
 	
 	<schema name="db_kaifang" checkSQLschema="false" sqlMaxLimit="100">
-		<table name="kaifang" primaryKey="id" autoIncrement="true"  subTables="kaifang$1-10"  dataNode="dn1" rule="mod-long" />
+		<table name="kaifang" primaryKey="id" autoIncrement="true"  subTables="kaifang$1-10"  dataNode="dn1" rule="kaifang-mod-long" />
 	</schema>
 
 	

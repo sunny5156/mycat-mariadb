@@ -41,6 +41,12 @@
 			<algorithm>mod-long</algorithm>
 		</rule>
 	</tableRule>
+	<tableRule name="kaifang-mod-long">
+		<rule>
+			<columns>id</columns>
+			<algorithm>kaifang-mod-long</algorithm>
+		</rule>
+	</tableRule>
 	<tableRule name="sharding-by-murmur">
 		<rule>
 			<columns>id</columns>
@@ -103,6 +109,11 @@
 		<property name="mapFile">autopartition-long.txt</property>
 	</function>
 	<function name="mod-long" class="io.mycat.route.function.PartitionByMod">
+		<!-- how many data nodes -->
+		<property name="count">10</property>
+	</function>
+	
+	<function name="kaifang-mod-long" class="io.mycat.route.function.PartitionByMod">
 		<!-- how many data nodes -->
 		<property name="count">10</property>
 	</function>
