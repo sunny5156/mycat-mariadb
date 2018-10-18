@@ -28,7 +28,7 @@
 	<property name="processorBufferPoolType">0</property>
 	<!--默认是65535 64K 用于sql解析时最大文本长度 -->
 	<!--<property name="maxStringLiteralLength">65535</property>-->
-	<!--<property name="sequnceHandlerType">0</property>-->
+	<property name="sequnceHandlerType">0</property><!-- 开启id记录 0:本地文件方式   1:数据库方式   2:本地时间戳方式  3:分布式ZK ID 生成器    -->
 	<!--<property name="backSocketNoDelay">1</property>-->
 	<!--<property name="frontSocketNoDelay">1</property>-->
 	<!--<property name="processorExecutor">16</property>-->
