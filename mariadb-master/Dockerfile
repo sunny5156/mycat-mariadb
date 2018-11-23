@@ -62,7 +62,7 @@ RUN \
 		echo "[mariadb]"; \
 		echo "name = MariaDB"; \
 		echo "#baseurl = http://yum.mariadb.org/10.3/centos7-amd64"; \
-		echo "baseurl = https://mirrors.shu.edu.cn/mariadb/mariadb-10.3.7/yum/centos7-amd64/"; \
+		echo "baseurl = https://mirrors.ustc.edu.cn/mariadb/yum/10.3/centos7-amd64/"; \
 		echo "gpgkey=https://yum.mariadb.org/RPM-GPG-KEY-MariaDB"; \
 		echo "gpgcheck=1"; \
 	} > /etc/yum.repos.d/mariadb-10.3.repo \
