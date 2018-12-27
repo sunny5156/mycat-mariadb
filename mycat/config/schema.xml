@@ -21,7 +21,7 @@
 	</dataHost>
 	<dataHost name="localhost2" maxCon="1000" minCon="10" balance="0" writeType="0" dbType="mongodb" dbDriver="jdbc" switchType="1" slaveThreshold="100"  >
         <heartbeat>select user()</heartbeat>
-        <writeHost host="hostM1" url="mongodb://190.168.0.14:27017" user="" password=""> <!-- url、user、password 设置成你的数据库 -->
+        <writeHost host="hostM1" url="mongodb://190.168.0.14:27017" > <!-- url、user、password 设置成你的数据库 -->
         </writeHost>
     </dataHost>
 	<!--
