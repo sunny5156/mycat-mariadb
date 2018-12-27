@@ -9,7 +9,7 @@
 
 	
 	<dataNode name="dn1" dataHost="localhost1" database="db_2000w" />
-	<dataNode name="dn2" dataHost="localhost2" database="db2"/>
+	<dataNode name="dn2" dataHost="localhost2" database="db_2000w"/>
 	
 	<dataHost name="localhost1" maxCon="1000" minCon="10" balance="0" writeType="0" dbType="mysql" dbDriver="native" switchType="1"  slaveThreshold="100">
 		<heartbeat>select user()</heartbeat>
