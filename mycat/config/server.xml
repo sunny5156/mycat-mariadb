@@ -95,5 +95,10 @@
 		</privileges>		
 		 -->
 	</user>
+	
+	<user name="root" defaultAccount="true">
+		<property name="password">123456</property>
+		<property name="schemas">dbtest</property>
+	</user>
 
 </mycat:server>
