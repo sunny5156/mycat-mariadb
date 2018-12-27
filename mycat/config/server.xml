@@ -83,7 +83,7 @@
 
 	<user name="root" defaultAccount="true">
 		<property name="password">123456</property>
-		<property name="schemas">db_kaifang</property>
+		<property name="schemas">db_kaifang,dbtest</property>
 		
 		<!-- 表级 DML 权限设置 -->
 		<!-- 		
@@ -96,9 +96,5 @@
 		 -->
 	</user>
 	
-	<user name="root" defaultAccount="true">
-		<property name="password">123456</property>
-		<property name="schemas">dbtest</property>
-	</user>
 
 </mycat:server>
