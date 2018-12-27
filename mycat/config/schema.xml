@@ -4,10 +4,12 @@
 	
 	<schema name="db_kaifang" checkSQLschema="false" sqlMaxLimit="100">
 		<table name="kaifang" primaryKey="id" autoIncrement="true"  subTables="kaifang$1-10"  dataNode="dn1" rule="kaifang-mod-long" />
+		<table name="user_mongo" dataNode="dn2" autoIncrement="true" primaryKey="_ID"  />
 	</schema>
 
 	
 	<dataNode name="dn1" dataHost="localhost1" database="db_2000w" />
+	<dataNode name="dn2" dataHost="localhost2" database="db2"/>
 	
 	<dataHost name="localhost1" maxCon="1000" minCon="10" balance="0" writeType="0" dbType="mysql" dbDriver="native" switchType="1"  slaveThreshold="100">
 		<heartbeat>select user()</heartbeat>
@@ -17,6 +19,11 @@
 		<!-- </writeHost> -->
 		<writeHost host="hostM4" url="190.168.0.14:3306" user="wsadmin"  password="xast890567??" />
 	</dataHost>
+	<dataHost name="localhost2" maxCon="1000" minCon="10" balance="0" writeType="0" dbType="mongodb" dbDriver="jdbc" switchType="1" slaveThreshold="100"  >
+        <heartbeat>select user()</heartbeat>
+        <writeHost host="hostM1" url="mongodb://190.168.0.14:27017" user="" password=""> <!-- url、user、password 设置成你的数据库 -->
+        </writeHost>
+    </dataHost>
 	<!--
 		<dataHost name="sequoiadb1" maxCon="1000" minCon="1" balance="0" dbType="sequoiadb" dbDriver="jdbc">
 		<heartbeat> 		</heartbeat>
